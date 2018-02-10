@@ -22,7 +22,11 @@ ghc-options: -Wall
 
 library:
   dependencies:
+    - QuickCheck
     - base
+    # - math-functions
+    - quickcheck-instances
+    - vector
   source-dirs: library
 
 executables:
@@ -61,6 +65,7 @@ tests:
       - tasty-discover
       - tasty-hspec
       - tasty-quickcheck
+      - vector
       - wavetoy5
     ghc-options:
       - -rtsopts

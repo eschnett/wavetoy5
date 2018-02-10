@@ -1,31 +1,33 @@
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE PolyKinds #-}
+{-# LANGUAGE ConstraintKinds #-}
 {-# LANGUAGE ConstraintKinds #-}
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE TypeSynonymInstances #-}
-{-# LANGUAGE ConstraintKinds #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE FlexibleContexts #-}
+{-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GADTs #-}
 {-# LANGUAGE KindSignatures #-}
+{-# LANGUAGE PolyKinds #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeInType #-}
+{-# LANGUAGE TypeSynonymInstances #-}
+{-# LANGUAGE UndecidableInstances #-}
 
-{-# OPTIONS_GHC -Wno-dodgy-exports #-}
 {-# OPTIONS_GHC -Wno-unused-matches #-}
 
 module Category
     ( CatKind
-    , Category(..)
+    , Category
     , FunKind
     , Function(..)
     , Discretization(..)
     , FIdentity(..)
     , FCompose(..)
     , Hask
+    , Numeric
     ) where
 
 import Data.Kind
+import Text.Read
 
 
 
@@ -65,7 +67,10 @@ instance Eq (FIdentity k a b) where
 instance Ord (FIdentity k a b) where
     compare _ _ = EQ
 instance k a => Read (FIdentity k a a) where
-    readsPrec d r = [(FIdentity, s) | ("FIdentity", s) <- lex r]
+    -- readsPrec d r = [(FIdentity, s) | ("FIdentity", s) <- lex r]
+    readPrec = do Ident "FIdentity" <- lexP
+                  return FIdentity
+    readListPrec = readListPrecDefault
 instance Show (FIdentity k a b) where
     showsPrec d FIdentity = showString "FIdentity"
 instance Category k => Function (FIdentity k) where
@@ -95,3 +100,9 @@ instance Function (->) where
 -- | Haskell functions live in Hask.
 instance Discretization (->) where
     discretize = id
+
+
+
+class RealFloat a => Numeric a
+instance RealFloat a => Numeric a
+instance Category Numeric
