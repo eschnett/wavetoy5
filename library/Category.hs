@@ -55,7 +55,7 @@ class Category (FunCat f) => Function (f :: FunKind) where
 -- | A function that can approximate a function in Hask.
 class Function f => Discretization f where
     -- | Convert (approximate) a Hask function to this representation
-    discretized :: (FunCat f a, FunCat f b) => (a -> b) -> f a b
+    discretize :: (FunCat f a, FunCat f b) => (a -> b) -> f a b
 
 -- | A generic identity function
 data FIdentity (k :: CatKind) a b where
@@ -94,4 +94,4 @@ instance Function (->) where
     chase = id
 -- | Haskell functions live in Hask.
 instance Discretization (->) where
-    discretized = id
+    discretize = id
