@@ -1,0 +1,65 @@
+# This YAML file describes your package. Stack will automatically generate a
+# Cabal file when you run `stack build`. See the hpack website for help with
+# this file: <https://github.com/sol/hpack>.
+name: wavetoy5
+version: '0.0.0'
+github: "eschnett/wavetoy5"
+license: MIT
+author: "Erik Schnetter"
+maintainer: "Erik Schnetter"
+synopsis: wavetoy5 is a Haskell WaveToy implementation
+description: wavetoy5 is a Haskell WaveToy implementation.
+# category: Other
+
+extra-source-files:
+  - CHANGELOG.rst
+  - LICENSE.rst
+  - package.yaml
+  - README.rst
+  - stack.yaml
+
+ghc-options: -Wall
+
+library:
+  dependencies:
+    - base
+  source-dirs: library
+
+executables:
+  wavetoy5:
+    source-dirs: executable
+    main: Main.hs
+    dependencies:
+      - base
+      - wavetoy5
+    ghc-options:
+      - -rtsopts
+      - -threaded
+      - -with-rtsopts=-N
+
+benchmarks:
+  wavetoy5-benchmarks:
+    source-dirs: benchmark
+    main: Main.hs
+    dependencies:
+      - base
+      - wavetoy5
+      - criterion
+    ghc-options:
+      - -rtsopts
+      - -threaded
+      - -with-rtsopts=-N
+
+tests:
+  wavetoy5-test-suite:
+    source-dirs: test-suite
+    main: Main.hs
+    dependencies:
+      - base
+      - wavetoy5
+      - tasty
+      - tasty-hspec
+    ghc-options:
+      - -rtsopts
+      - -threaded
+      - -with-rtsopts=-N
