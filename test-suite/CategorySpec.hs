@@ -31,3 +31,12 @@ prop_FCompose_assoc :: Fun C A -> Fun B C -> Fun A B -> A -> Property
 prop_FCompose_assoc (Fn f) (Fn g) (Fn h) x =
     chase ((f `FCompose` g) `FCompose` h) x ===
     chase (f `FCompose` (g `FCompose` h)) x
+
+prop_Hask_embed :: Fun A B -> A -> Property
+prop_Hask_embed (Fn f) x =
+    (discretize . chase) f x === f x
+
+prop_Hask_project :: Fun A B -> A -> Property
+prop_Hask_project (Fn f) x =
+    (chase . (discretize @ (->)) . chase . (discretize @ (->))) f x ===
+    (chase . (discretize @ (->))) f x
