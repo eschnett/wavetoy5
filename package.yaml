@@ -55,10 +55,13 @@ tests:
     source-dirs: test-suite
     main: Main.hs
     dependencies:
+      - QuickCheck
       - base
-      - wavetoy5
       - tasty
+      - tasty-discover
       - tasty-hspec
+      - tasty-quickcheck
+      - wavetoy5
     ghc-options:
       - -rtsopts
       - -threaded
