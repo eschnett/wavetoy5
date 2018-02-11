@@ -2,7 +2,7 @@
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE UndecidableInstances #-}
 
-module ChebFun where
+module ChebFun(ChebFun(..)) where
 
 import qualified Data.Vector.Generic as G
 import qualified Test.QuickCheck as QC

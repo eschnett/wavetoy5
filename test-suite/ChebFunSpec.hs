@@ -1,3 +1,4 @@
+{-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE TypeApplications #-}
 
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
@@ -33,11 +34,12 @@ prop_ChebFun_project (Fn f) x =
 
 
 
+-- TODO: Move this into its own module
 -- | Like '==', but allowing for round-off error
 -- TODO: Use IEEE to avoid arbitrary constant
 infix 4 ~~
 (~~) :: (Fractional a, Ord a) => a -> a -> Bool
-x ~~ y = abs (x - y) < 1.0e-13 * max 1 (max (abs x) (abs y))
+x ~~ y = abs (x - y) < 1.0e-13 * (1 `max` abs x `max` abs y)
 
 -- | Like '===', but allowing for round-off error
 infix 4 ~~~
