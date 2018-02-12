@@ -39,7 +39,7 @@ prop_ChebFun_project (Fn f) x =
 -- TODO: Use IEEE to avoid arbitrary constant
 infix 4 ~~
 (~~) :: (Fractional a, Ord a) => a -> a -> Bool
-x ~~ y = abs (x - y) < 1.0e-13 * (1 `max` abs x `max` abs y)
+x ~~ y = abs (x - y) < 1.0e-12 * (1 `max` abs x `max` abs y)
 
 -- | Like '===', but allowing for round-off error
 infix 4 ~~~

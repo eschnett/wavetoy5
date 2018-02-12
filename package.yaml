@@ -1,6 +1,6 @@
-# This YAML file describes your package. Stack will automatically generate a
-# Cabal file when you run `stack build`. See the hpack website for help with
-# this file: <https://github.com/sol/hpack>.
+# This YAML file describes your package. Stack will automatically
+# generate a Cabal file when you run `stack build`. See the hpack
+# website for help with this file: <https://github.com/sol/hpack>.
 name: wavetoy5
 version: '0.0.0'
 github: "eschnett/wavetoy5"
@@ -14,8 +14,8 @@ description: wavetoy5 is a Haskell WaveToy implementation.
 extra-source-files:
   - CHANGELOG.rst
   - LICENSE.rst
-  - package.yaml
   - README.rst
+  - package.yaml
   - stack.yaml
 
 ghc-options: -Wall
@@ -27,11 +27,11 @@ library:
     # - math-functions
     - quickcheck-instances
     - vector
-  source-dirs: library
+  source-dirs: lib
 
 executables:
   wavetoy5:
-    source-dirs: executable
+    source-dirs: exe
     main: Main.hs
     dependencies:
       - base
@@ -43,12 +43,12 @@ executables:
 
 benchmarks:
   wavetoy5-benchmarks:
-    source-dirs: benchmark
+    source-dirs: bench
     main: Main.hs
     dependencies:
       - base
-      - wavetoy5
       - criterion
+      - wavetoy5
     ghc-options:
       - -rtsopts
       - -threaded
@@ -56,7 +56,7 @@ benchmarks:
 
 tests:
   wavetoy5-test-suite:
-    source-dirs: test-suite
+    source-dirs: test
     main: Main.hs
     dependencies:
       - QuickCheck
