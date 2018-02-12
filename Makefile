@@ -1,4 +1,4 @@
-DIRS = library executable test-suite benchmark
+DIRS = lib exe test bench
 EXE = wavetoy5
 
 all: indent lint build test coverage bench doc exec
