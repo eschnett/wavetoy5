@@ -13,7 +13,7 @@ import Category
 
 prop_FIdentity_id :: A -> Property
 prop_FIdentity_id x =
-    chase (FIdentity @ Hask) x === x
+    chase (FIdentity @Hask) x === x
 
 prop_FCompose_compose :: Fun B C -> Fun A B -> A -> Property
 prop_FCompose_compose (Fn f) (Fn g) x =
@@ -38,5 +38,5 @@ prop_Hask_embed (Fn f) x =
 
 prop_Hask_project :: Fun A B -> A -> Property
 prop_Hask_project (Fn f) x =
-    (chase . (discretize @ (->)) . chase . (discretize @ (->))) f x ===
-    (chase . (discretize @ (->))) f x
+    (chase . discretize @(->) . chase . discretize @(->)) f x ===
+    (chase . discretize @(->)) f x

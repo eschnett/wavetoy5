@@ -1,5 +1,4 @@
 {-# LANGUAGE FlexibleContexts #-}
-{-# LANGUAGE TypeApplications #-}
 
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 
@@ -18,7 +17,7 @@ prop_Chebyshev_zero x =
     cpoly x ~~~ poly x
     where poly _ = 0
           coeffs = chebyshevApprox 0 poly :: U.Vector Double
-          cpoly = \y -> chebyshev y coeffs
+          cpoly y = chebyshev y coeffs
 
 prop_Chebyshev_polynomial ::
     Positive Int -> Double -> NonNegative Int -> Double -> Property
@@ -30,7 +29,7 @@ prop_Chebyshev_polynomial (Positive n') a' (NonNegative i') x' =
           x = mod' x' 1.01
           poly y = a * y ^ i
           coeffs = chebyshevApprox n poly :: U.Vector Double
-          cpoly = \y -> chebyshev y coeffs
+          cpoly y = chebyshev y coeffs
 
 
 

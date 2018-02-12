@@ -24,13 +24,13 @@ prop_ChebFun_assoc f g h x =
 
 prop_ChebFun_embed :: CFun Double Double -> Double -> Property
 prop_ChebFun_embed f x =
-    -- ((discretize @ CFun) . chase) f === f
-    chase (((discretize @ CFun) . chase) f) x ~~~ chase f x
+    -- ((discretize @CFun) . chase) f === f
+    chase ((discretize @CFun . chase) f) x ~~~ chase f x
 
 prop_ChebFun_project :: Fun Double Double -> Double -> Property
 prop_ChebFun_project (Fn f) x =
-    (chase . (discretize @ CFun) . chase . (discretize @ CFun)) f x ~~~
-    (chase . (discretize @ CFun)) f x
+    (chase . discretize @CFun . chase . discretize @ CFun) f x ~~~
+    (chase . discretize @CFun) f x
 
 
 

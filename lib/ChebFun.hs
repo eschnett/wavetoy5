@@ -19,7 +19,7 @@ ncoeffs :: Int
 ncoeffs = 5
 
 -- TODO: Store as b
-data ChebFun v a b = ChebFun (v Double)
+newtype ChebFun v a b = ChebFun (v Double)
 instance G.Vector v Double => Eq (ChebFun v a b) where
     ChebFun cs1 == ChebFun cs2 = G.eq cs1 cs2
 instance G.Vector v Double => Ord (ChebFun v a b) where
