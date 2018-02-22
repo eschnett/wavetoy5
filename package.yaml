@@ -18,7 +18,54 @@ extra-source-files:
   - package.yaml
   - stack.yaml
 
-ghc-options: -Wall
+ghc-options:
+  - -funbox-strict-fields
+  - -Wall
+  - -Wcompat
+  - -Wincomplete-record-updates
+  - -Wincomplete-uni-patterns
+  - -Wredundant-constraints
+  - -Wno-unused-matches
+
+default-extensions:
+  #esoteric - ApplicativeDo
+  - BangPatterns
+  - ConstraintKinds
+  - DataKinds
+  - DefaultSignatures
+  - DeriveFoldable
+  - DeriveFunctor
+  - DeriveGeneric
+  - DeriveLift
+  - DeriveTraversable
+  #unknown - DerivingStrategies
+  - EmptyCase
+  - ExistentialQuantification
+  - FlexibleContexts
+  - FlexibleInstances
+  - FunctionalDependencies
+  - GADTs
+  - GeneralizedNewtypeDeriving
+  - InstanceSigs
+  - KindSignatures
+  - LambdaCase
+  - MultiParamTypeClasses
+  - MultiWayIf
+  - NamedFieldPuns
+  - OverloadedStrings
+  - PatternSynonyms
+  - RankNTypes
+  - ScopedTypeVariables
+  - StandaloneDeriving
+  - TupleSections
+  - TypeApplications
+  - TypeFamilies
+  - TypeFamilyDependencies
+  - TypeOperators
+  # more controversial?
+  - AllowAmbiguousTypes
+  - PolyKinds
+  - TypeInType
 
 library:
   dependencies:
@@ -26,6 +73,8 @@ library:
     - base
     # - math-functions
     - quickcheck-instances
+    - validity
+    - validity-vector
     - vector
   source-dirs: lib
 
@@ -63,7 +112,7 @@ tests:
       - base
       - tasty
       - tasty-discover
-      - tasty-hspec
+      # - tasty-hspec
       - tasty-quickcheck
       - vector
       - wavetoy5

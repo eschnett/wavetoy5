@@ -6,7 +6,7 @@ all: indent lint build test coverage bench doc exec
 setup:
 #	TODO: Remove MacPorts (/opt/local) from PATH
 	stack setup
-	stack install hlint
+	stack build hlint
 
 indent:
 #	find $(DIRS) -name '*.hs' -print0 | xargs -0 -P4 -n1 hindent
@@ -14,7 +14,7 @@ indent:
 # 		xargs -0 -I '{}' -P4 -n1 brittany -i '{}' -o '{}'
 
 lint: indent
-	hlint lint --report --no-exit-code $(DIRS)
+	stack exec hlint -- lint --report --no-exit-code $(DIRS)
 build: indent
 	stack build
 test: indent

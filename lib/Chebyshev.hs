@@ -1,7 +1,5 @@
-{-# OPTIONS_GHC -funbox-strict-fields #-}
-
 -- | Adapted from [math-functions-0.2.1.0] Numeric.Polynomial.Chebyshev
-module Chebyshev (chebyshev, chebyshevApprox) where
+module Chebyshev (chebyshev, chebyshevApprox, chebyshevApprox') where
 
 import qualified Data.Vector.Generic as G
 
@@ -41,8 +39,12 @@ chebyshev x cs =
 
 
 -- | See <http://mathworld.wolfram.com/ChebyshevApproximationFormula.html>
+
 chebyshevApprox :: (G.Vector v a, Floating a) => Int -> (a -> a) -> v a
-chebyshevApprox n f = G.generate n coeff
+chebyshevApprox n = chebyshevApprox' (2 * n) n
+
+chebyshevApprox' :: (G.Vector v a, Floating a) => Int -> Int -> (a -> a) -> v a
+chebyshevApprox' n nc f = G.generate nc coeff
     where coeff j = 2 / fi n * sum [f (x k) * cheb j k | k <- [0..n-1]]
           x k = cos (pi * (fi k + 0.5) / fi n)
           cheb j k = cos (pi * fi j * (fi k + 0.5) / fi n)
